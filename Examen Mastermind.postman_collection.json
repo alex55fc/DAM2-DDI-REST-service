@@ -1,0 +1,760 @@
+{
+	"info": {
+		"_postman_id": "1fb545eb-1071-47d9-add7-8b3d6ad048a1",
+		"name": "Examen Mastermind",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10114961"
+	},
+	"item": [
+		{
+			"name": "Generate New Key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('generatedKey');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"size\": 5,\r\n    \"tries\": 15\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/generateKey",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"generateKey"
+					]
+				},
+				"description": "Este metodo envia el tamaño de la clave a generar y el numero de intentos de la partida y devuelve el codigo 200OK y un json con la clave generada\nvale 1,5 puntos"
+			},
+			"response": [
+				{
+					"name": "Generate Key",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/generateKey",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"generateKey"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"size\": 5,\r\n    \"tries\": 15,\r\n    \"generatedKey\": \"rojo,azul,naranja,rosa,verde\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Change Max tries",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.tries).to.eql(parseInt(pm.request.url.query.toObject().tries));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/changeTries?tries=6",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"changeTries"
+					],
+					"query": [
+						{
+							"key": "tries",
+							"value": "6"
+						}
+					]
+				},
+				"description": "Este metodo cambia el numero de intentos permitidos por el usuario\nvale 1,5 puntos"
+			},
+			"response": [
+				{
+					"name": "Change Max tries",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/changeTries?tries=8",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"changeTries"
+							],
+							"query": [
+								{
+									"key": "tries",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"tries\": 8\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Change key answer size",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Json have property generated key\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('generatedKey');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/answerSize/5/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"answerSize",
+						"5",
+						""
+					]
+				},
+				"description": "Este metodo envia mediante get el cambio en el tamaño de la respuesta durante la partida en la partida\nvale 1,5 puntos"
+			},
+			"response": [
+				{
+					"name": "Change key answer size to 3",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/answerSize/3/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"answerSize",
+								"3",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"size\": 3,\n    \"generatedKey\": \"rojo,azul,naranja\"\n}"
+				},
+				{
+					"name": "Change key answer size to 5",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/answerSize/5/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"answerSize",
+								"5",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"size\": 5,\n    \"generatedKey\": \"rojo,azul,naranja,rosa,verde\"\n}"
+				},
+				{
+					"name": "Change key answer size to 7",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/answerSize/7/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"answerSize",
+								"7",
+								""
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"size\": 7,\n    \"generatedKey\": \"rojo,azul,naranja,rosa,verde,amarillo,gris\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Check User Answer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([202,400,406]);\r",
+							"});\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('message');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"answer\": [\"red\",\"yellow\",\"green\",\"blue\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/checkAnswer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"checkAnswer"
+					]
+				},
+				"description": "Este método permite enviar un array de colores para comprobar la respuesta del usuario con la clave generada y con cada comprobación se resta en una unidad el numero de intentos\nvale 1,5 puntos"
+			},
+			"response": [
+				{
+					"name": "CheckAnswer and is correct",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"answer\": [\"red\",\"yellow\",\"green\",\"blue\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/checkAnswer",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"checkAnswer"
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"message\": \"answer correct\"\n}"
+				},
+				{
+					"name": "CheckAnswer and is wrong",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"answer\": [\"null\",\"null\",\"null\",\"null\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/checkAnswer",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"checkAnswer"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"message\": \"answer incorrect\"\n}"
+				},
+				{
+					"name": "CheckAnswer and size invalid",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"answer\": [\"null\",\"null\",\"null\",\"null\",\"null\",\"null\",\"null\",\"null\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"status": "Not Acceptable",
+					"code": 406,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"message\": \"answer size invalid\",\n    \"reason\": \"expected max size: 5\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Check User Left Tries",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,400,406]);\r",
+							"});\r",
+							"pm.test(\"lefttries property\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('lefttries');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/checkTries",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"checkTries"
+					]
+				},
+				"description": "Este método consultar el numero de intentos restantes que tiene el usuario todavia\nvale 1 puntos"
+			},
+			"response": []
+		},
+		{
+			"name": "Insert New Score Record",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Request return codo 201 or 202\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/saveRecordScore?initial=sadasd&name=asdasddsasdasdsa",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"saveRecordScore"
+					],
+					"query": [
+						{
+							"key": "initial",
+							"value": "sadasd"
+						},
+						{
+							"key": "name",
+							"value": "asdasddsasdasdsa"
+						}
+					]
+				},
+				"description": "Este metodo permite insertar las iniciales y el nombre de un usuario para ser guardado como marcador\nvale 1,5 puntos"
+			},
+			"response": [
+				{
+					"name": "Insert Score Record 202",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/saveRecordScore?initial=gs&name=gorka sanz",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"saveRecordScore"
+							],
+							"query": [
+								{
+									"key": "initial",
+									"value": "gs",
+									"description": "initial of the winner"
+								},
+								{
+									"key": "name",
+									"value": "gorka sanz",
+									"description": "name of the winner"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"message\": \"new rocord added\",\n    \"initial\": \"gs\",\n    \"name\": \"gorka sanz\"\n}"
+				},
+				{
+					"name": "Insert Score Record 201",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/saveRecordScore?initial=gs&name=gorka sanz",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"saveRecordScore"
+							],
+							"query": [
+								{
+									"key": "initial",
+									"value": "gs",
+									"description": "initial of the winner"
+								},
+								{
+									"key": "name",
+									"value": "gorka sanz",
+									"description": "name of the winner"
+								}
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"message\": \"new rocord added\",\n    \"initial\": \"gs\",\n    \"name\": \"gorka sanz\"\n}"
+				}
+			]
+		},
+		{
+			"name": "List ScoreBoard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Result length equals to maxSize\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.eql(parseInt(pm.request.url.query.toObject().maxSize));\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/listScoreboard?maxSize=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"listScoreboard"
+					],
+					"query": [
+						{
+							"key": "maxSize",
+							"value": "1",
+							"description": "max size of list to return"
+						}
+					]
+				},
+				"description": "Este metodo devuelve una lista la tabla de marcadores\nvale 1,5 puntos"
+			},
+			"response": [
+				{
+					"name": "List ScoreBoard max size 4",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/listScoreboard?maxSize=4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"listScoreboard"
+							],
+							"query": [
+								{
+									"key": "maxSize",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"initial\": \"gs\",\r\n        \"name\": \"gorka sanz\",\r\n        \"tries\": 3\r\n    },\r\n    {\r\n        \"initial\": \"ja\",\r\n        \"name\": \"juan apellaniz\",\r\n        \"tries\": 5\r\n    },\r\n    {\r\n        \"initial\": \"gs\",\r\n        \"name\": \"gorka\",\r\n        \"tries\": 10\r\n    },\r\n    {\r\n        \"initial\": \"as\",\r\n        \"name\": \"agustin sole\",\r\n        \"tries\": 15\r\n    }\r\n]"
+				},
+				{
+					"name": "List ScoreBoard max size 3",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/listScoreboard?maxSize=3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"listScoreboard"
+							],
+							"query": [
+								{
+									"key": "maxSize",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"initial\": \"gs\",\r\n        \"name\": \"gorka sanz\",\r\n        \"tries\": 3\r\n    },\r\n    {\r\n        \"initial\": \"ja\",\r\n        \"name\": \"juan apellaniz\",\r\n        \"tries\": 5\r\n    },\r\n    {\r\n        \"initial\": \"gs\",\r\n        \"name\": \"gorka\",\r\n        \"tries\": 10\r\n    }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "asdasdas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"numero1\" : 2,\r\n    \"numero2\" : 4,\r\n    \"resultado\" : 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/sumador",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"sumador"
+					]
+				},
+				"description": "ddd"
+			},
+			"response": []
+		}
+	]
+}
